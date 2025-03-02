@@ -69,7 +69,14 @@ export async function netlifyCommonEngineHandler(
   request: Request,
   context: any
 ): Promise<Response> {
-  return await render(commonEngine);
+  try {
+    return await render(commonEngine);
+  } catch (error) {
+    console.error('Error netlifyCommonEngineHandler', error);
+  }
+
+  console.log('POKEMON SSR ERROR - returning empty promise');
+  return new Promise<Response>((res) => res);
 }
 
 export default app;
