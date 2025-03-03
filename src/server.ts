@@ -13,6 +13,20 @@ const indexHtml = join(serverDistFolder, 'index.server.html');
 const app = express();
 const commonEngine = new CommonEngine();
 
+export async function netlifyCommonEngineHandler(
+  request: Request,
+  context: any
+): Promise<Response> {
+  // Example API endpoints can be defined here.
+  // Uncomment and define endpoints as necessary.
+  // const pathname = new URL(request.url).pathname;
+  // if (pathname === '/api/hello') {
+  //   return Response.json({ message: 'Hello from the API' });
+  // }
+
+  return await render(commonEngine);
+}
+
 /**
  * Example Express Rest API endpoints can be defined here.
  * Uncomment and define endpoints as necessary.
@@ -45,6 +59,7 @@ app.get('**', (req, res, next) => {
   commonEngine
     .render({
       bootstrap,
+      documentFilePath: indexHtml,
       url: `${protocol}://${headers.host}${originalUrl}`,
       publicPath: browserDistFolder,
       providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
@@ -63,17 +78,3 @@ if (isMainModule(import.meta.url)) {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
-
-export async function netlifyCommonEngineHandler(
-  request: Request,
-  context: any
-): Promise<Response> {
-  try {
-    return await render(commonEngine);
-  } catch (error) {
-    console.error('Error netlifyCommonEngineHandler', error);
-    return new Response('Internal Server Error', { status: 500 });
-  }
-}
-
-export default netlifyCommonEngineHandler;
