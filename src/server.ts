@@ -45,7 +45,6 @@ app.get('**', (req, res, next) => {
   commonEngine
     .render({
       bootstrap,
-      documentFilePath: indexHtml,
       url: `${protocol}://${headers.host}${originalUrl}`,
       publicPath: browserDistFolder,
       providers: [{ provide: APP_BASE_HREF, useValue: baseUrl }],
@@ -73,10 +72,8 @@ export async function netlifyCommonEngineHandler(
     return await render(commonEngine);
   } catch (error) {
     console.error('Error netlifyCommonEngineHandler', error);
+    return new Response('Internal Server Error', { status: 500 });
   }
-
-  console.log('POKEMON SSR ERROR - returning empty promise');
-  return new Promise<Response>((res) => res);
 }
 
-export default app;
+export default netlifyCommonEngineHandler;

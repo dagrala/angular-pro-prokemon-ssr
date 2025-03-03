@@ -1,3 +1,7 @@
 [build]
   command = "ng build"
   publish = "dist/pokemon-ssr/browser"
+
+[[edge_functions]]
+  path = "/*"
+  function = "netlifyCommonEngineHandler"
