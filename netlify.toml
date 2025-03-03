@@ -2,6 +2,9 @@
   command = "ng build"
   publish = "dist/pokemon-ssr/browser"
 
+[functions]
+  directory = "dist/pokemon-ssr/server"
+
 [[edge_functions]]
   path = "/*"
   function = "netlifyCommonEngineHandler"
