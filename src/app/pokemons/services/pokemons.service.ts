@@ -29,8 +29,8 @@ export class PokemonsService {
             })
           );
           return simplePokemons;
-        }),
-        tap(console.log)
+        })
+        // tap(console.log)
       );
   }
 }
