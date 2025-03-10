@@ -43,7 +43,7 @@ module.exports = async function (config) {
       customLaunchers: {
         ChromeHeadlessCustom: {
           base: 'ChromeHeadless',
-          flags: ['--no-sandbox', '--disable-gpu'],
+          flags: ['--no-sandbox', '--disable-gpu', '--headless=new'], // Añade --headless=new
           executablePath: browserPath,
         },
       },
