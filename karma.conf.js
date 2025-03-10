@@ -5,6 +5,7 @@ const puppeteer = require('puppeteer');
 module.exports = async function (config) {
   try {
     const browserPath = puppeteer.executablePath();
+    console.log('Browser path:', browserPath);
 
     config.set({
       basePath: '',
