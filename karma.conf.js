@@ -6,6 +6,7 @@ module.exports = async function (config) {
   try {
     const browserPath = puppeteer.executablePath();
     console.log('Browser path:', browserPath);
+    process.env.CHROME_BIN = browserPath;
 
     config.set({
       basePath: '',
